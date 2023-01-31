@@ -3,7 +3,7 @@
     "first_name": "Team",
     "last_name": "Test",
     "email": "test@email.com",
-    "password": "password12345",
+    "password": "12345",
     "current_weight": "200",
     "goal_weight": "150"
     },
