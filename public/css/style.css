@@ -1,0 +1,14 @@
+:root {
+    --dark: rgb(6, 41, 37);
+    --cold: rgb(4, 74, 66);
+    --teal: rgb(58, 145, 136);
+    --sea: rgb(184, 225, 221);
+}
+
+.background {
+    background-color: var(--sea);
+}
+
+.hero {
+    background-color: var(--teal);
+}
