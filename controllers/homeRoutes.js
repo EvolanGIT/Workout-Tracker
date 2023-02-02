@@ -12,7 +12,7 @@ router.get('/', withAuth, async (req, res) => {
 
     const users = userData.map((project) => project.get({ plain: true }));
 
-    res.render('login', 
+    res.render('createPost', 
     {users,
       // Pass the logged in flag to the template
       logged_in: req.session.logged_in,

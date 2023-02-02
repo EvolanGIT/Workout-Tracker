@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 const fs = require("fs");
-const uniqueID = require("uniqid");
+const uniqueID = require("uuid");
 const User = require("../../models/User");
 
 // route to post posts
@@ -30,7 +30,7 @@ router.get("/posts", (req, res) => {
 });
 
 //route to update the user's current weight in the db
-router.put(‘/User/:current_weight’, function (req, res, next) {
+router.put('/User/:current_weight', function (req, res, next) {
     User.update(
       {title: req.body.current_weight},
       {returning: true, where: {id: req.params.id} }

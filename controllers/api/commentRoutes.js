@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 const fs = require("fs");
-const uniqueID = require("uniqid");
+const uniqueID = require("uuid");
 
 // route to post comment
 router.post("/comment", (req, res) => {

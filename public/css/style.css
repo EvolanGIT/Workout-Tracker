@@ -12,3 +12,13 @@
 .hero {
     background-color: var(--teal);
 }
+
+#logo{
+    height: auto;
+    max-width: 8%;
+}
+
+.font-theme {
+    font-family: 'Patua One', cursive;
+font-family: 'Rubik Mono One', sans-serif;
+}
