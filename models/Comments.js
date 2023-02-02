@@ -23,11 +23,7 @@ Comments.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       foreignKey: true,
-    },
-    post_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-  },
+    }
 },
   {
     sequelize,
