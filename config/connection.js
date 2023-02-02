@@ -1,8 +1,10 @@
+// Imports
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
 let sequelize;
 
+// this allows Sequelize to use the information in the .env file to be used, keeping personal information safe.
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
