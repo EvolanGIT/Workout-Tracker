@@ -1,6 +1,5 @@
 [
     {
-    "id":1001,
     "user_name": "Team Test",
     "email": "test@email.com",
     "password": "12345",
@@ -8,7 +7,6 @@
     "goal_weight": "150"
     },
     {
-    "id":1002,
     "user_name": "Sal Monella",
     "email": "salmonella@email.com",
     "password": "password12345",
@@ -16,7 +14,6 @@
     "goal_weight": "150"
     },
     {
-    "id": 1003,
     "user_name": "Joe Mammah",
     "email": "joemammah@email.com",
     "password": "password12345",
@@ -24,7 +21,6 @@
     "goal_weight": "140"
     },
     {
-    "id":1004,
     "user_name": "Tri Pin",
     "email": "utrippin@email.com",
     "password": "password12345",

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Posts } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Prevent non logged in users from viewing the homepage
@@ -36,7 +36,7 @@ router.get("/userdata", async (req, res) => {
   // If a session exists, redirect the request to the homepage
   try {
     // change to User.findOne() or User.findByPk()
-  const userdata = await User.findAll()
+  const userdata = await User.findAll({include: [Posts]})
 //console.log(userdate)
 
 // if using findOne() or findByPk() use:
