@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const path = require("path");
-const fs = require("fs");
 const uniqueID = require("uuid");
 const User = require("../../models/User");
 
