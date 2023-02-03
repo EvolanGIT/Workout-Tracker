@@ -1,31 +1,39 @@
 const router = require("express").Router();
 const path = require("path");
-const fs = require("fs");
 const uniqueID = require("uuid");
+const { Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// route to post comment
-router.post("/comment", (req, res) => {
-    let commentID = uniqueID();
-    const Content = JSON.parse(fs.readFileSync("./db/db_comments.json"));
-    res.json(commentContent)
-    console.log(commentID);
+//Creates a comment
+router.post('/', withAuth, (req, res) => {
+    Comment.create({
+      comment_text: req.body.comment_text,
+      user_id: req.session.user_id,
+      post_id: req.body.post_id
+    })
+      .then(dbCommentData => res.json(dbCommentData))
+      .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  });
 
-    const newComment = {
-        title: req.body.title,
-        text: req.body.text, 
-        id: commentID,
-    };
-    postContent.push(newComment);
-    fs.writeFileSync("./db/db_comment.json", JSON.stringify(commentContent));
-
-});
-
-//route to delete comment
-router.delete('/comment/:id', (req, res) => {
-    let savedComment = JSON.parse(fs.readFileSync("./db/db_comment.json", "utf8"));
-    let commentID= savedComment.filter(x=>x.id!=req.params.id) 
-fs.writeFileSync("./db/db_comment.json", JSON.stringify(commentID), (err) => {
-    if (err) throw err;
-});
-return res.json(savedComment);
-});
+  //Destroys the comment
+  router.delete('/:id', withAuth, (req, res) => {
+    Comment.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbCommentData => {
+        if (!dbCommentData) {
+          res.status(404).json({ message: 'No comment found with this id!' });
+          return;
+        }
+        res.json(dbCommentData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
