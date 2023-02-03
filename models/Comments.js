@@ -11,11 +11,7 @@ Comments.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
+    user_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },

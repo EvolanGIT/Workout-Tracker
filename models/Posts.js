@@ -19,9 +19,6 @@ Posts.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // likes: {
-    //   type: DataTypes.INTEGER,
-    // },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

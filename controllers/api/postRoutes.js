@@ -1,105 +1,98 @@
-const router = require("express").Router();
 const path = require("path");
 const uniqueID = require("uuid");
-const { User, Post, Comment, Like } = require("../../models/User"); // not sure if we are creating a model for likes??
+const { User, Post, Comment } = require("../../models/User"); 
 const withAuth = require('../../utils/auth');
-
-
 
 
 // route to post posts
 // 3001/api/posts
 // get all posts for dashboard
 
-router.get('/', withAuth (req, res) => {
-    Post.findAll({
-      attributes: [
-        'id',
-        'post_title',
-        'post_text',
-        'likes',
-        'user_id',
-        'user_name',
-        [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'likes']
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-          include: {
-            model: User,
-            attributes: ['user_name']
-          }
-        },
-        {
+
+//insert get
+// get all users
+router.get('/', (req, res) => {
+  console.log('======================');
+  Post.findAll({
+    attributes: [
+      'id',
+      'post_title',
+      'post_text',
+      'user_id',
+    ],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'user_name', 'comment', 'post_id'],
+        include: {
           model: User,
           attributes: ['user_name']
         }
-      ]
-    })
-      .then(dbPostData => {
-        const posts = dbPostData.map(post => post.get({ plain: true }));
-  
-        res.render('posts', {
-          posts,
-          loggedIn: req.session.loggedIn
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
-
-  //creates a post
-  router.post('/', withAuth, (req, res) => {
-    Post.create({
-      id, //<-------------??
-      post_title: req.body.post_title,
-      post_text: req.body.post_text,
-      likes, //<------------??
-      user_id: req.session.user_id
-    })
-      .then(dbPostData => res.json(dbPostData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
-
-
-  //for likes (probably needs more work) copy and repurpose to update current weight in db
-  router.put('/like', withAuth, (req, res) => {
-    Post.like({ ...req.body, user_id: req.session.user_id }, { Likes, Comment, User })
-      .then(updatedlikeData => res.json(updatedlikeData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
-
-  //for deleting post
-  router.delete('/:id', withAuth, (req, res) => {
-    console.log('id', req.params.id);
-    Post.destroy({
-      where: {
-        id: req.params.id
+      },
+      {
+        model: User,
+        attributes: ['user_name']
       }
-    })
-      .then(dbPostData => {
-        if (!dbPostData) {
-          res.status(404).json({ message: 'No post found with this id' });
-          return;
-        }
-        res.json(dbPostData);
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+    ]
+  })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-  
+
+
+
+//creates a post
+router.post('/', withAuth, (req, res) => {
+  Post.create({
+    id, //<-------------??
+    post_title: req.body.post_title,
+    post_text: req.body.post_text,
+    user_id: req.session.user_id
+  })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+
+//for deleting post
+router.delete('/:id', withAuth, (req, res) => {
+  console.log('id', req.params.id);
+  Post.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
+        return;
+      }
+      res.json(dbPostData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+
+// put to update current weight in db
+router.put('/current_weight', withAuth, (req, res) => {
+  Post.current_weight({ ...req.body, user_id: req.session.user_id }, { User })
+    .then(updatedUserData => res.json(updatedUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 
 
 module.exports = router;
