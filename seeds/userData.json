@@ -17,7 +17,7 @@
     },
     {
     "id": 1003,
-    "User_name": "Joe Mammah",
+    "user_name": "Joe Mammah",
     "email": "joemammah@email.com",
     "password": "password12345",
     "current_weight": "180",
