@@ -14,6 +14,12 @@ const seedDatabase = async () => {
     returning: true,
     }
   );
+  
+  await Posts.bulkCreate(postsData, 
+    {
+    returning: true,
+    }
+  );
 
   await Comments.bulkCreate(commentsData, 
     {
@@ -21,11 +27,7 @@ const seedDatabase = async () => {
     }
   );
 
-  await Posts.bulkCreate(postsData, 
-    {
-    returning: true,
-    }
-  );
+
 
   process.exit(0);
 };

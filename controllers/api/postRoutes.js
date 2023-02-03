@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         'post_title',
         'post_text',
         'likes',
-        'user_id'
+        'user_id',
         'user_name',
         [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'likes']
       ],
@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
       .then(dbPostData => {
         const posts = dbPostData.map(post => post.get({ plain: true }));
   
-        res.render('dashboard', {
+        res.render('posts', {
           posts,
           loggedIn: req.session.loggedIn
         });
