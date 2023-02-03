@@ -27,8 +27,6 @@ const loginFormHandler = async (event) => {
     event.preventDefault();
 
     // Gather the data from the form elements on the page
-    // const first_name = document.querySelector("#First-Name").value.trim();
-    // const last_name = document.querySelector("#Last-Name").value.trim();
     const user_name = document.querySelector("#Username").value.trim();
     const password = document.querySelector("#Password").value.trim();
     const email = document.querySelector("#E-mail").value.trim();
