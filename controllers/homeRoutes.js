@@ -6,7 +6,7 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   try {
     const userData = await User.findAll({
-      attributes: { exclude: ['password', 'first_name', 'last_name', 'current_weight', 'goal_weight'] },
+      attributes: { exclude: ['password', 'user_name', 'current_weight', 'goal_weight'] },
       order: [['email', 'ASC']],
     });
 
@@ -30,6 +30,16 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+router.get('/dashboard', async (req, res) => {
+
+const postData= await Posts.findAll();
+console.log(postData);
+const allPosts= postData.map(post=> post.get({plain: true}))
+console.log(allPosts);
+
+res.render('posts', {allPosts});
 });
 
 router.get("/profile", withAuth, async (req, res) => {
