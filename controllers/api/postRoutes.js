@@ -11,7 +11,7 @@ const withAuth = require('../../utils/auth');
 // 3001/api/posts
 // get all posts for dashboard
 
-router.get('/', withAuth (req, res) => {
+router.get('/', withAuth, (req, res) => {
     Post.findAll({
       attributes: [
         'id',
