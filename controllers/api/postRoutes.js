@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 const uniqueID = require("uuid");
-const { User, Post, Comment, Like } = require("../../models/User"); // not sure if we are creating a model for likes??
+const { User, Posts, Comments, Like } = require("../../models"); // not sure if we are creating a model for likes??
 const withAuth = require('../../utils/auth');
 
 
@@ -12,7 +12,7 @@ const withAuth = require('../../utils/auth');
 // get all posts for dashboard
 
 router.get('/', withAuth, (req, res) => {
-    Post.findAll({
+    Posts.findAll({
       attributes: [
         'id',
         'post_title',
@@ -48,18 +48,12 @@ router.get('/', withAuth, (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
-      });
+      })
   });
 
   //creates a post
   router.post('/', withAuth, (req, res) => {
-    Post.create({
-      id, //<-------------??
-      post_title: req.body.post_title,
-      post_text: req.body.post_text,
-      likes, //<------------??
-      user_id: req.session.user_id
-    })
+    Post.create(req.body)
       .then(dbPostData => res.json(dbPostData))
       .catch(err => {
         console.log(err);

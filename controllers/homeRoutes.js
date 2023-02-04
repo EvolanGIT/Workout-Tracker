@@ -6,7 +6,7 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, async (req, res) => {
   try {
     const userData = await User.findAll({
-      attributes: { exclude: ['password', 'first_name', 'last_name', 'current_weight', 'goal_weight'] },
+      attributes: { exclude: ['password', 'user_name', 'current_weight', 'goal_weight'] },
       order: [['email', 'ASC']],
     });
 
@@ -32,19 +32,29 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get("/userdata", async (req, res) => {
+router.get('/dashboard', async (req, res) => {
+
+const postData= await Posts.findAll();
+console.log(postData);
+const allPosts= postData.map(post=> post.get({plain: true}))
+console.log(allPosts);
+
+res.render('posts', {allPosts});
+});
+
+router.get("/profile", withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
   try {
     // change to User.findOne() or User.findByPk()
-  const userdata = await User.findAll({include: [Posts]})
-//console.log(userdate)
+  const userdata = await User.findOne({where: {id : req.session.userId}, include: [Posts]})
+  console.log(userdata);
 
 // if using findOne() or findByPk() use:
-//const userTest = userData.get({plain: true})
-  const userTest = userdata.map(user => user.get({plain : true}))
+const userTest = userdata.get({plain: true})
+  // const userTest = userdata.map(user => user.get({plain : true}))
 console.log(userTest)
 
-  res.render("userdata.handlebars", {userTest});
+  res.render("profile.handlebars", {userTest});
   } catch (err) {
     if (err) throw (err)
   }

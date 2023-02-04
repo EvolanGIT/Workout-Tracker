@@ -1,15 +1,15 @@
 <!-- Posted Handlebar layout -->
-{{#each posts as |post|}}
+{{#each allPosts as |post|}}
 <section class="container mt-5">
         <div class="card mb-3">
                     <h1 class="card-header">
-                    {{user.user_name}} posted:
+                    {{user_name}} posted:
                     </h1>
             <div class="card-body">
                     <h5 class="card-title">{{post_title}}</h5>
                     <ul class="list-group mt-4 list-group-horizontal">
                         <li class="list-group-item">{{current_weight}}</li>
-                        <li class="list-group-item">{{user.goal_weight}}</li>
+                        <li class="list-group-item">{{goal_weight}}</li>
                     </ul>
                     <h6 class="card-text mt-3">{{post_text}}</h6>
                 <div class="d-flex justify-content-end">
