@@ -8,9 +8,11 @@ const logout = async () => {
     if (response.ok) {
       // If successfully logged out, redirect to the login page
       document.location.replace('/login');
+      //other wise it will return a error message
     } else {
       alert(response.statusText);
     }
   };
   
   document.querySelector('#logout').addEventListener('click', logout);
+  //Event listener on the logout button to trigger the function when clicked

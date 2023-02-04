@@ -40,10 +40,11 @@ const loginFormHandler = async (event) => {
         body: JSON.stringify({ email, password, user_name, current_weight, goal_weight}),
         headers: { "Content-Type": "application/json" },
       });
-
+     //If the request is sucessful, user will be directed to profile page
       if (response.ok) {
         console.log("sign up successful")
         document.location.replace("/profile");
+       // otherwise it will return a error message
       } else {
         alert("Failed to log in");
       }
@@ -51,3 +52,4 @@ const loginFormHandler = async (event) => {
   };
   document.querySelector('#login-form').addEventListener('submit', loginFormHandler);
   document.querySelector('#sign-up-form').addEventListener('submit', signUpFormHandler);
+  //Event listeners set on both login and sign form to trigger the correpsponding form hadling funcitons when forms are submitted
