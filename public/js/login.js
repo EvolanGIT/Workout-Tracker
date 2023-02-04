@@ -43,7 +43,7 @@ const loginFormHandler = async (event) => {
 
       if (response.ok) {
         console.log("sign up successful")
-        // document.location.replace("/");
+        document.location.replace("/profile");
       } else {
         alert("Failed to log in");
       }

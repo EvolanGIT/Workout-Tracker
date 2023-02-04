@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const path = require("path");
 const uniqueID = require("uuid");
-const { User, Post, Comment, Like } = require("../../models/User"); // not sure if we are creating a model for likes??
+const { User, Posts, Comments, Like } = require("../../models"); // not sure if we are creating a model for likes??
 const withAuth = require('../../utils/auth');
 
 
@@ -11,8 +11,8 @@ const withAuth = require('../../utils/auth');
 // 3001/api/posts
 // get all posts for dashboard
 
-router.get('/', withAuth (req, res) => {
-    Post.findAll({
+router.get('/', withAuth, (req, res) => {
+    Posts.findAll({
       attributes: [
         'id',
         'post_title',
@@ -48,7 +48,7 @@ router.get('/', withAuth (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
-      });
+      })
   });
 
   //creates a post
