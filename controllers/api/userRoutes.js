@@ -3,7 +3,7 @@ const { User } = require('../../models');
 
 
 // localhost:3001/api/users
-router.post("/users", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newUser = await User.create(req.body);
 
