@@ -28,29 +28,23 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
 
+
 router.get('/dashboard', async (req, res) => {
-
 const postData= await Posts.findAll();
-
 const allPosts= postData.map(post=> post.get({plain: true}))
-
 res.render('posts', {allPosts});
-
-  res.render('posts', {allPosts});
 });
+
 
 router.get("/newPost", async(req,res) => {
-
   const postData = await Posts.findAll();
-
   const allPosts = postData.map(post => post.get({plain : true}))
-
   res.render('createPost');
 });
+
 
 router.get("/profile", withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
