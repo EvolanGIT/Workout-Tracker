@@ -53,13 +53,7 @@ router.get('/', withAuth, (req, res) => {
 
   //creates a post
   router.post('/', withAuth, (req, res) => {
-    Post.create({
-      id, //<-------------??
-      post_title: req.body.post_title,
-      post_text: req.body.post_text,
-      likes, //<------------??
-      user_id: req.session.user_id
-    })
+    Post.create(req.body)
       .then(dbPostData => res.json(dbPostData))
       .catch(err => {
         console.log(err);
