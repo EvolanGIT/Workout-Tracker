@@ -12,10 +12,10 @@ router.get('/', withAuth, async (req, res) => {
 
     const users = userData.map((project) => project.get({ plain: true }));
 
-    res.render('createPost', 
+    res.render('posts', 
     {users,
       // Pass the logged in flag to the template
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -24,23 +24,27 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/login', (req, res) => {
   // If a session exists, redirect the request to the homepage
-  if (req.session.logged_in) {
+  if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
 
+
 router.get('/dashboard', async (req, res) => {
-
 const postData= await Posts.findAll();
-console.log(postData);
 const allPosts= postData.map(post=> post.get({plain: true}))
-console.log(allPosts);
-
 res.render('posts', {allPosts});
 });
+
+
+router.get("/newPost", async(req,res) => {
+  const postData = await Posts.findAll();
+  const allPosts = postData.map(post => post.get({plain : true}))
+  res.render('createPost');
+});
+
 
 router.get("/profile", withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
