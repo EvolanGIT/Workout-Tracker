@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const path = require("path");
-const uniqueID = require("uuid");
 const { User, Posts, Comments, Like } = require("../../models"); // not sure if we are creating a model for likes??
 const withAuth = require('../../utils/auth');
 
@@ -52,14 +51,36 @@ router.get('/', withAuth, (req, res) => {
   });
 
   //creates a post
-  router.post('/', withAuth, (req, res) => {
-    Post.create(req.body)
-      .then(dbPostData => res.json(dbPostData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+  // router.post('/', withAuth, (req, res) => {
+  //   Post.create(req.body)
+  //     .then(dbPostData => res.json(dbPostData))
+  //     .catch(err => {
+  //       console.log(err);
+  //       res.status(500).json(err);
+  //     });
+  // });
+
+  // post create
+  router.post('/', async (req, res) => {
+    try {
+      const newProject = await Post.create({
+        ...req.body,
+        user_id: req.session.user_id,
       });
+      res.status(200).json(newProject);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   });
+
+
+
+
+
+
+
+
+
 
 
   //for likes (probably needs more work) copy and repurpose to update current weight in db
