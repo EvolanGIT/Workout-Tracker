@@ -1,11 +1,10 @@
     <!-- Posting section (Dashboard handlebar layout) -->
     <section class="card container mt-5">
-        <form id="post-form">
+        <form id="postForm">
         <div class=" mb-3">
-            <label for="exampleFormControlInput1" class="form-label fs-3">Journey Entry</label>
-            <input type="title" class="form-control" id="#post-title" placeholder="Post title">
+            <label for="newPost" class="form-label fs-3">Journey Entry</label>
+            <input type="title" class="form-control" id="post-title" placeholder="Post title">
         </div>
-        {{!-- update weight input below --}}
         <input type="title" class="form-control" id="Journey_Name" placeholder="Update your Weight Loss here">
 
         <div class="mt-3">
@@ -14,8 +13,8 @@
             <textarea class="form-control" id="post-text" rows="3" placeholder="Remember, the community is here to uplift each other, keep your Posts civil."></textarea>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn px-4 my-3 mt-3 btn-success">Post</button>
+                
             </div>    
         </div>
         </form>
     </section>
-    <script src="/js/post.js"></script>
