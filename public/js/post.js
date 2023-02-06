@@ -20,7 +20,7 @@ const postFormHandler = async (event) => {
 
       if (response.ok) {
         console.log("post successful")
-        document.location.replace("/dashboard");
+        document.location.replace("/");
       } else {
         alert("failed to post message");
       }
