@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const path = require("path");
-const uniqueID = require("uuid");
 const { User, Posts, Comments, Like } = require("../../models"); // not sure if we are creating a model for likes??
 const withAuth = require('../../utils/auth');
 

@@ -1,10 +1,13 @@
 const postFormHandler = async (event) => {
   
-  event.preventDefault(event);
+  event.preventDefault();
+
   console.log('this button works')
-  
-  const post_title = document.querySelector("#post-title").value.trim();
-  const post_text = document.querySelector("#post-text").value.trim();
+    // Gather the data from the form elements on the page
+    const userName= document.querySelector('#profile')
+    const post_title = document.querySelector('#post-title').value.trim();
+    //placeholder for updated wt variable
+    const post_text = document.querySelector('#post-text').value.trim();
 
 
     
@@ -23,4 +26,9 @@ const postFormHandler = async (event) => {
       }
     }
   };
-  document.querySelector('#postForm').addEventListener('submit', postFormHandler);
+ //modal
+//  $('#myModal').on('shown.bs.modal', function () {
+//   $('#myInput').trigger('focus')
+// })
+  document.querySelector("#postForm")
+  .addEventListener("submit", postFormHandler)
