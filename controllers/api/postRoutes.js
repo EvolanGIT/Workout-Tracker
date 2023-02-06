@@ -55,7 +55,7 @@ router.get('/', withAuth, (req, res) => {
     try {
       const newPost = await Posts.create({
         ...req.body,
-        userId: req.session.userId,
+        user_id: req.session.userId,
       });
   
       res.status(200).json(newPost);
@@ -68,7 +68,7 @@ router.get('/', withAuth, (req, res) => {
   //for likes (probably needs more work) copy and repurpose to update current weight in db
   router.put('/like', withAuth, (req, res) => {
     Post.like({ ...req.body, 
-      user_id: req.session.user_id },
+      user_id: req.session.userId },
       { Likes, Comment, User })
       .then(updatedlikeData => res.json(updatedlikeData))
       .catch(err => {
