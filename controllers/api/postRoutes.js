@@ -13,15 +13,15 @@ const withAuth = require('../../utils/auth');
 router.get('/', withAuth, (req, res) => {
   try{  
   const postData = Posts.findAll({
-      // attributes: [
-      //   'id',
-      //   'post_title',
-      //   'post_text',
-      //   'likes',
-      //   'user_id',
-      //   'user_name',
-      //   [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'likes']
-      // ],
+      attributes: [
+        'id',
+        'post_title',
+        'post_text',
+        // 'likes',
+        'user_id',
+        'user_name',
+        // [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'likes']
+      ],
       include: [
         {
           model: Comment,
@@ -38,7 +38,6 @@ router.get('/', withAuth, (req, res) => {
       ],
     });
         const posts = postData.map(post => post.get({ plain: true }));
-  
         res.render('posts', {
           posts,
           loggedIn: req.session.loggedIn
@@ -79,8 +78,8 @@ router.get('/', withAuth, (req, res) => {
 
   //for deleting post
   router.delete('/:id', withAuth, (req, res) => {
-    console.log('id', req.params.id);
-    Post.destroy({
+    // console.log('id', req.params.id);
+    Posts.destroy({
       where: {
         id: req.params.id
       }
