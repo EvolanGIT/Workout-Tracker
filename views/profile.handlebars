@@ -1,8 +1,23 @@
-<h1> This is the user data </h1>
-
-{{#if userTest}}
-<p>user_name : {{userTest.user_name}}</p>
-{{userTest.email}}
-{{userTest.current_weight}}
-{{userTest.goal_weight}}
-{{/if}}
+<section class="container mt-5 ">
+    <div class="d-flex justify-content-center">
+    <h1 class="row font-theme"> User profile </h1> 
+    </div>
+    <div class="d-flex justify-content-center">
+    <div class="col-xl-4 col-sm-4 mb-5">
+        <div class="bg-white text-center rounded shadow-sm py-4 px-4 photos">
+            <img src="/assets/images/GainSpaceNoBgLogo.png" alt="gainspaceLogo" width="100" class="mb-4 shadow-sm">
+            <h5 class="font-theme">Username</h5>
+            <h5 class="mb-0 fs-2">{{userTest.user_name}}</h5>
+            <hr class="border border-primary border-3 opacity-75">
+            <h5 class="font-theme">Password</h5>
+            <p class="mt-3 fs-3 ">{{userTest.email}}</p>
+            <hr>
+            <h5 class="font-theme">Current Weight</h5>
+            <p class="mt-3 fs-3">{{userTest.current_weight}}</p>
+            <hr>
+            <h5 class="font-theme">Goal Weight</h5>
+            <p class="mt-3 fs-3">{{userTest.goal_weight}}</p>
+        </div>
+    </div>
+    </div> 
+</section>
