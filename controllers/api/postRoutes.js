@@ -65,12 +65,12 @@ router.get('/', withAuth, (req, res) => {
   });
 
 
-  //for likes (probably needs more work) copy and repurpose to update current weight in db
-  router.put('/like', withAuth, (req, res) => {
-    Post.like({ ...req.body, 
+  //update current weight in db
+  router.put('/profile', withAuth, (req, res) => {
+    Post.currentWeight({ ...req.body, 
       user_id: req.session.userId },
-      { Likes, Comment, User })
-      .then(updatedlikeData => res.json(updatedlikeData))
+      { Posts, User })
+      .then(updatedCurrentWeight => res.json(updatedCurrentWeight))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
