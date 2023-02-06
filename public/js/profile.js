@@ -10,6 +10,6 @@ const deletePost = async () => {
   await fetch (`/api/posts/${postId}`, {
     method : 'DELETE' 
   })
-  // document.location.replace('/')
+  document.location.replace('/')
 }
 document.querySelector ('#deletebutton').addEventListener('click', deletePost)
