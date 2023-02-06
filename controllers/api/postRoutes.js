@@ -12,16 +12,17 @@ const withAuth = require('../../utils/auth');
 // get all posts for dashboard
 
 router.get('/', withAuth, (req, res) => {
-    Posts.findAll({
-      attributes: [
-        'id',
-        'post_title',
-        'post_text',
-        'likes',
-        'user_id',
-        'user_name',
-        [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'likes']
-      ],
+  try{  
+  const postData = Posts.findAll({
+      // attributes: [
+      //   'id',
+      //   'post_title',
+      //   'post_text',
+      //   'likes',
+      //   'user_id',
+      //   'user_name',
+      //   [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'likes']
+      // ],
       include: [
         {
           model: Comment,
@@ -34,37 +35,42 @@ router.get('/', withAuth, (req, res) => {
         {
           model: User,
           attributes: ['user_name']
-        }
-      ]
-    })
-      .then(dbPostData => {
-        const posts = dbPostData.map(post => post.get({ plain: true }));
+        },
+      ],
+    });
+        const posts = postData.map(post => post.get({ plain: true }));
   
         res.render('posts', {
           posts,
           loggedIn: req.session.loggedIn
         });
-      })
-      .catch(err => {
+    } catch(err) {
         console.log(err);
         res.status(500).json(err);
-      })
+      }
   });
 
-  //creates a post
-  router.post('/', withAuth, (req, res) => {
-    Post.create(req.body)
-      .then(dbPostData => res.json(dbPostData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+
+  // post create
+  router.post('/', withAuth, async (req, res) => {
+    try {
+      const newPost = await Posts.create({
+        ...req.body,
+        userId: req.session.userId,
       });
+  
+      res.status(200).json(newPost);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   });
 
 
   //for likes (probably needs more work) copy and repurpose to update current weight in db
   router.put('/like', withAuth, (req, res) => {
-    Post.like({ ...req.body, user_id: req.session.user_id }, { Likes, Comment, User })
+    Post.like({ ...req.body, 
+      user_id: req.session.user_id },
+      { Likes, Comment, User })
       .then(updatedlikeData => res.json(updatedlikeData))
       .catch(err => {
         console.log(err);

@@ -1,27 +1,26 @@
 const postFormHandler = async (event) => {
-    // Stop the browser from submitting the form so we can do so with JavaScript
-    event.preventDefault();
   
-    // Gather the data from the form elements on the page
-    const post_title = document.querySelector('#post-title').value.trim();
-    //placeholder for updated wt var
-    const post_text = document.querySelector('#post-text').value.trim();
+  event.preventDefault(event);
+  console.log('this button works')
   
+  const post_title = document.querySelector("#post-title").value.trim();
+  const post_text = document.querySelector("#post-text").value.trim();
+
+
+    
     if (post_title && post_text) {
-      // Send the e-mail and password to the server
-      const response = await fetch('/api/users', {
-        method: 'POST',
+      const response = await fetch("/api/posts", {
+        method: "POST",
         body: JSON.stringify({ post_title, post_text}),
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
       });
-  
+
       if (response.ok) {
-        document.location.replace('/dashboard');
+        console.log("post successful")
+        document.location.replace("/dashboard");
       } else {
-        alert('Failed to log in');
+        alert("failed to post message");
       }
     }
   };
-
-  document.querySelector("#post-form")
-  .addEventListener("submit", postFormHandler)
+  document.querySelector('#postForm').addEventListener('submit', postFormHandler);
