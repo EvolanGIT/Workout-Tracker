@@ -6,6 +6,7 @@
         {{post.user.user_name}}
         posted:
       </h1>
+      {{user.id}}
       <div class="card-body">
         <h5 class="card-title">{{post_title}}</h5>
         <ul class="list-group mt-4 list-group-horizontal">
@@ -15,6 +16,9 @@
         <h6 class="card-text mt-3">{{post_text}}</h6>
         <div class="d-flex justify-content-end">
           <!-- Button trigger modal -->
+          <button type="button" id="deletebutton" value="" class="btn btn-primary">
+            Delete
+          </button>
           <button
             type="button"
             class="btn btn-primary"
@@ -60,5 +64,5 @@
   </section>
 {{/each}}
 
-<script src="/Workout-Tracker/public/js/login.js"></script>
-<script src="/Workout-Tracker/public/js/profile.js"></script>
+{{!-- <script src="/Workout-Tracker/public/js/login.js"></script>
+<script src="/Workout-Tracker/public/js/profile.js"></script> --}}
