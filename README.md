@@ -27,13 +27,13 @@
 
 ## Access
 
-## Link to the Heroku deployed app [**HERE**](placeholder)
+## Link to the Heroku deployed app [**HERE**](https://gain-space.herokuapp.com/login)
 
 ## Visuals
 
 ---
 
-![Alt fullsite](placeholder)
+![Alt fullsite](./public/assets/images/gain-space.herokuapp.com_login.png)
 
 ---
 
